@@ -1,7 +1,6 @@
 package hello.advanced.trace.strategy;
 
 import hello.advanced.trace.strategy.code.strategy.ContextV1;
-import hello.advanced.trace.strategy.code.strategy.Strategy;
 import hello.advanced.trace.strategy.code.strategy.StrategyLogic1;
 import hello.advanced.trace.strategy.code.strategy.StrategyLogic2;
 import lombok.extern.slf4j.Slf4j;
@@ -50,13 +49,9 @@ public class ContextV1Test {
 
     @Test
     void strategyV2() {
-        Strategy strategyLogic1 = () -> log.info("1번째 비지니스 로직");
-
-        ContextV1 contextV1 = new ContextV1(strategyLogic1);
+        ContextV1 contextV1 = new ContextV1(() -> log.info("1번째 비지니스 로직"));
         contextV1.execute();
-
-        Strategy strategyLogic2 = () -> log.info("2번째 비지니스 로직");
-        ContextV1 contextV2 = new ContextV1(strategyLogic2);
+        ContextV1 contextV2 = new ContextV1(() -> log.info("2번째 비지니스 로직"));
         contextV2.execute();
     }
 }
